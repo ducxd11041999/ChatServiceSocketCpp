@@ -1,0 +1,6 @@
+*.o
+*.out
+*.obj
+*.sh
+
+server/config/config.h

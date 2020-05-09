@@ -1,0 +1,59 @@
+stages:
+<<<<<<< HEAD
+    - buildserver
+    - buildclient
+    - test
+    - success
+    
+buildserver:
+    stage: buildserver
+    script: 
+        - echo "Building Server"
+        - cd server/Mf
+        - cmake .
+        - make
+    artifacts:
+        paths:
+            - server/Mf
+            
+buildclient:
+    stage: buildclient
+    script: 
+        - echo "Building Client"
+        - cd client/Mf
+        - cmake .
+        - make
+    artifacts:
+        paths:
+=======
+    - build
+    - test
+    - success
+    
+build:
+    stage: build
+    script: 
+        - echo "Building"
+        - cd server/Mf
+        - cmake .
+        - make
+        - cd .. /..
+        - cd client/Mf
+        - cmake .
+        - make
+        - mv myserver build
+    artifacts:
+        paths:
+            - server/Mf
+>>>>>>> fa8bf2cb2aadeb6ca3d060145291a7c0de69fc3f
+            - client/Mf
+            
+test:
+    stage: test
+    script:
+        - cd test
+        - python3 runner.py 
+success:
+    stage: success
+    script:
+        - echo "Build is success and safe".

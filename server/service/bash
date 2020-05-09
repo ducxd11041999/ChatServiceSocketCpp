@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+g++ -o server -Wall main.cpp ../Util/util.cpp sock_connect.cpp databaseAccess.cpp ../models/user.cpp ../models/Room.cpp ../responsibility/usersDA.cpp ../responsibility/MySQLAccess.cpp ../responsibility/messagesDA.cpp ../responsibility/roomsDA.cpp ../responsibility/rolesDA.cpp -lmysqlcppconn -std=gnu++11
+./server
+
+

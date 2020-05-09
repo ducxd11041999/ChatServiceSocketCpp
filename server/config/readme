@@ -1,0 +1,2 @@
+Run this command to add stored procedures to db:
+	mysql -u root -p test<proc_file

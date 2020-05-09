@@ -1,0 +1,58 @@
+
+
+File config.h include lib and define for all file in model 
+package.h define class package
+
+/*-------------------------------------*/
+/*
+		login ->> set user name and password 
+			=>void setUP(char u[], char p[])
+
+		with  ->> set username receiver
+			=>void setRev(char *u)			
+
+		joih  ->> set room's name
+			void setRoom(char *r)
+
+		nor-mess ->> set Mess
+			=>void setMess(char* m)
+
+		///=> setType is detect your activity (option)
+
+		watch content of message follow struct data
+			=>>union message showAction();
+
+		EXAMPLE SHOW DATA OF LOGIN
+		message m = p.showAction();
+		cout<<m.Login.uName<<" "<<m.Login.pWord<<endl;
+
+	STRUCT OF MESSAGE:))
+union message
+{
+	struct login
+	{
+		char uName[SIZE_U];
+		char pWord[SIZE_P];
+	}Login;
+	struct messageSend
+	{
+		char mess[SIZE_MESS];
+		 
+	}MessSend;
+	struct with
+	{
+		char userRev[SIZE_U];
+		
+	}With;
+	
+	struct join
+	{
+		char roomName[SIZE_U];
+		
+	}Join;
+	
+};
+*/
+/*-------------------------------------*/
+
+

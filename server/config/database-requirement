@@ -1,0 +1,27 @@
+#!/bin/bash
+
+sudo apt install build-essential checkinstall zlib1g-dev -y
+cd /usr/local/src/
+sudo wget https://www.openssl.org/source/openssl-1.1.1c.tar.gz
+sudo tar -xf openssl-1.1.1c.tar.gz
+cd openssl-1.1.1c
+sudo ./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl shared zlib
+sudo make
+sudo make test
+sudo make install
+cd /etc/ld.so.conf.d/
+sudo echo "/usr/local/ssl/lib" >> openssl-1.1.1c.conf
+sudo ldconfig -v
+sudo mv /usr/bin/c_rehash /usr/bin/c_rehash.backup
+sudo mv /usr/bin/openssl /usr/bin/openssl.backup
+sudo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/ssl/bin\"" >> /etc/environment
+which openssl
+openssl version -a
+
+sudo apt-get install mysql-server
+mysql_secure_installation
+systemctl status mysql.service
+
+sudo apt-get install libmysqlcppconn-dev
+
+

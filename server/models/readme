@@ -1,0 +1,25 @@
+class Room:
+-FUNCTIONS
+1/ add(int fdUser)
+    add a user to room
+2/ remove(int fdUser)
+    remove a user from room
+3/ setRoomID(char RoomID[])
+    put in a char array to change room name (room ID)
+4/ setCapacity(int Capacity)
+    put in an integer to change the user capacity of room
+5/ setRoom(char RoomID[], int Capacity)
+    set both room name (room ID) & user capacity of room
+6/ listClients()
+    return an integer address to control an integer array of user is currently in the room
+    REMEMBER: THE USER DATA OF ROOM WILL NOT BE CHANGED EVEN IF YOU CHANGE THE DATA IN THE ADDRESS YOU JUST RECEIVED
+7/ getRoomID()
+    return a char address to control an char array of room name (room ID)
+    REMEMBER: THE ROOM NAME (ROOM ID) DATA WILL NOT BE CHANGED EVEN IF YOU CHANGE THE DATA IN THE ADDRESS YOU JUST RECEIVED
+8/ getCapacity()
+    return an integer of the room's capacity
+9/ getOnlUser()
+    return an integer of number online users in room
+10/ find(int fdUser)
+    return  TRUE if user is found in room
+            FALSE if not

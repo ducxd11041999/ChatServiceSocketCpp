@@ -1,0 +1,111 @@
+CBA intern project season 22
+
+Use Cases
+----------
+UC1. Client logins with username/password [What if login with invalid account?]
+UC2. Enter an existing room [What if login with non-exist room?]
+UC3. Send message to every users in the room
+UC4. One-to-one talk
+UC5. Color the chat message
+UC6. List online users + List available rooms and its info.
+UC7. Ask server to perform a linux command and returns output
+
+Functionalities
+---------------
+1) Authentication
+User database (username & password) is created via immcfg tool.
+Only client that have valid account is allowed to connect with the server.
+
+e.g:
+./client -u testme -p testme
+Server done authentication: OK
+me@~ $
+
+2) Room search/selection
+a) Use command '?listroom' to show all room available and its information
+including the room number(R#), number of online users in that room(U#) and the
+room capability(C#).
+
+e.g:
+me@~ $ ?listroom
+[R#: 1; U#: 0; C#: 4]
+
+b) Use command '?enter <room number>' to enter a specific room. If that room is
+not yet full, the request will be accepted and the prompt will be changed
+accordingly - including the room number.
+
+Once one user sends chat message, all other users in room are quaranteed to
+receive it.
+
+e.g:
+me@~ $ ?enter 1
+Entered the room!
+me@<1>~ $
+
+c) Use command '?leave' to leave the room. The prompt will be changed too.
+e.g:
+me@<1>~ $ ?leave
+Left the room!
+me@~ $
+
+3) Online/offline user search/selection
+a) Use '?listuser' to show all online users.
+e.g:
+me@~ $ ?listuser
+[test]
+me@~ $
+
+b) Use '?finduser <part of name>' to list all usernames that contain the search
+string, or use '?finduser *' to list all - including both online and offline
+users. Online users will have a star (*) along with username.
+
+e.g:
+me@~ $ ?finduser *
+[test* | testme | vunguyen]
+me@~ $ ?finduser test
+[test* | testme]
+me@~ $
+
+c) Use '?with <username>' to send private msg to only given username. If that
+user is offline, server will cache the message locally and will send to the
+user when user is online. Besides, the peer will be informed about 'online'
+or 'offline' accordingly. The promb will be reflected to this connection too.
+The '#' indicates the peer is offline currently.
+
+e.g:
+me@~ $ ?with vunguyen
+Send offline msgs to username: vunguyen
+me@<vunguyen#>~ $
+[Tue 2019-06-04 15:07:37] user vunguyen is now online
+me@<vunguyen>~ $
+[Tue 2019-06-04 15:08:31] user vunguyen is now offline
+me@<vunguyen#>~ $
+
+4) Offline chat
+When user is online, if any message had sent to it while it was offline, they
+will be guranteed to get them all when online. These offline messages will be
+discarded by server and will be sent back to the sender if offline user does
+not online before the timer is expired. The timer can be configurable by
+changing `offlineMsgTimeout` attribute value. The resolution is in minute.
+
+5) Chat
+Use '?R' or '?B' '?G' before chat message to decorate the msg with RED, BLUE or
+GREENN color accordingly. And at the receiver, msg will be aligned at the right.
+
+e.g:
+me@<test>~ $ ?R hello
+me@<test>~ $
+                                      [test,15:23] hello
+
+5) Remotely shell execution
+Use '?shell <shell cmd>' to ask server performing the cmd remotely then send
+back the result to the requester.
+
+e.g:
+me@<test>~ $ ?shell pwd
+/home/ubuntu
+
+me@<test>~ $ ?shell ls
+client
+server
+me@<test>~ $

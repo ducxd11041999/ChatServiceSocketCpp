@@ -1,0 +1,17 @@
+  apiVersion: v1
+  kind: Service
+  metadata: 
+    name: myserver
+    labels:
+     app: myserver
+  spec:
+    ports:
+    - port: 54000
+      targetPort: 54000
+      protocol: TCP
+      name: http
+    selector:
+     app: myserver
+     tier: myserver
+    type: LoadBalancer
+

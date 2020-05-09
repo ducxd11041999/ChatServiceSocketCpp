@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+k delete --all deployment
+k delete --all services
+k delete --all PersistentVolumeClaim
+k delete PersistentVolume mysqldb
+k apply -f mysql_deployment.yaml
+k apply -f deployment_server.yaml
+k apply -f server.yaml
+k get pods

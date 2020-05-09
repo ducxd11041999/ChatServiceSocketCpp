@@ -1,0 +1,58 @@
+1/To access 'users' table, create a user database access pointer:
+	usersDA *myUsersDA = new usersDA();
+
+	Supported function:
+
+	/*
+	 *Function to get all users from database	
+	 *Return: array of user				
+	 */
+	user *selectAllUsers();
+
+	/*
+	 *Function to count all users		
+	 *Return: number of users in int
+	 */	
+    	int countAllUsers();
+
+	/*
+	 *Function to update a user state		
+	 *input: object user whose state need to be updated
+	 */	
+	void updateState(user usr);
+
+	/*	
+	 *Function to clear a user state	
+	 *Input: object user whose state need to be cleared
+	 */	
+	void clearState(user usr);
+
+	/*
+	 *Function to validate user login			
+	 *Input: string username and string password		
+	 *Return: boolean				
+	 *			true (1) - login successful	
+	 *			false(2) - login failed	
+	 */	
+	bool validateLogin(string username, string password);
+
+2/To access 'rooms' table, create a user database access pointer:
+	roomsDA *myRoomsDA = new roomsDA();
+
+	Supported function:
+
+	/*
+	 *Function to get all rooms from database	
+	 *Return: array of object Room				
+	 */
+	Room *selectAllRooms();
+
+	/*
+	 *Function to count all rooms		
+	 *Return: number of rooms in int
+	 */	
+    	int countAllRooms();
+
+
+
+

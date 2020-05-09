@@ -1,0 +1,24 @@
+step 1: To run step next you must to setup microk8s, docker.io and config
+//microk8s setup:
+       - sudo snap install microk8s --classic --channel=1.18/stable
+       - sudo usermod -a -G microk8s $USER
+       - su - $USER
+       - sudo microk8s.enabled dns storage registry dashboard
+       - sudo snap alias microk8s.kubectl k
+//docker set up same nomal
+step 2: run image mysql by docker file and push into registry of microk8s
+       - cd ./server
+       - sudo docker build . -t localhost:32000/mysqldb:registry
+       - sudo docker push localhost:32000/mysqldb:registry
+step 3: run image myserver by docker file and push into registry of microk8s
+       - cd ./service
+       - ./bash
+       - cd ..
+       - cd ..
+       - sudo docker build . -t localhost:32000/myserver:registry
+       - sudo docker push localhost:32000/myserver:registry
+step 4: run file ./kuberclear don't forget allow by rolse admin for it
+       - ./kuberclear
+step 5: check status of pods by command line: k get pods ["if status run then success"]
+step 6: get ip server change connection for client by command line: k get services ["get ip of myserver"]
+step 7: run bash file again client

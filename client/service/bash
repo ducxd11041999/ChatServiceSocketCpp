@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+g++ -o client main.cpp client.cpp ../models/user.cpp -lpthread -std=gnu++11
+./client

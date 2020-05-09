@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqldb-pv-volume
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+  apiVersion: apps/v1 
+  kind: Deployment
+  metadata:
+    name: myserver
+    labels:
+      app: myserver
+  spec:
+    replicas: 1
+    selector:
+     matchLabels:
+      app: myserver
+      tier: myserver
+    strategy:
+     type: Recreate
+    template:
+      metadata:
+        labels:
+          app: myserver
+          tier: myserver
+      spec:
+        containers:
+        - image: localhost:32000/myserver:registry
+          name: myserver
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: mysqldb
+            value: mysqldb.default.svc
+          ports:
+          - containerPort: 54000
+            name: myserver
+        volumes:
+        - name: myserver
+          persistentVolumeClaim:
+            claimName: mysqldb-pv-volume
